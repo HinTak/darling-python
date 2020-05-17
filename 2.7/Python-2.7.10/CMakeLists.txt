@@ -23,7 +23,8 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fwrapv -fPIC")
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}
 	${CMAKE_CURRENT_SOURCE_DIR}/Include
-	${CMAKE_CURRENT_SOURCE_DIR}/Modules/_ctypes/libffi_osx/include
+	${CMAKE_SOURCE_DIR}/src/external/libffi/darwin/include
+	${CMAKE_SOURCE_DIR}/src/external/libffi/include
 )
 
 set(python_sources
@@ -164,6 +165,7 @@ add_framework(Python
 	VERSION "2.7"
 	DEPENDENCIES
 		system
+		ffi
 )
 unset(DYLIB_COMPAT_VERSION)
 unset(DYLIB_CURRENT_VERSION)
@@ -252,8 +254,8 @@ pymodule(_bisect Modules/_bisectmodule.c)
 pymodule(_io Modules/_io/bufferedio.c Modules/_io/bytesio.c Modules/_io/fileio.c Modules/_io/iobase.c Modules/_io/_iomodule.c Modules/_io/stringio.c Modules/_io/textio.c)
 pymodule(_collections Modules/_collectionsmodule.c)
 pymodule(_csv Modules/_csv.c)
-pymodule(_ctypes Modules/_ctypes/callbacks.c Modules/_ctypes/callproc.c Modules/_ctypes/cfield.c Modules/_ctypes/_ctypes.c Modules/_ctypes/malloc_closure.c Modules/_ctypes/stgdict.c Modules/_ctypes/darwin/dlfcn_simple.c
-	Modules/_ctypes/libffi_osx/ffi.c  Modules/_ctypes/libffi_osx/x86/darwin64.S  Modules/_ctypes/libffi_osx/x86/x86-darwin.S  Modules/_ctypes/libffi_osx/x86/x86-ffi64.c  Modules/_ctypes/libffi_osx/x86/x86-ffi_darwin.c)
+pymodule(_ctypes Modules/_ctypes/callbacks.c Modules/_ctypes/callproc.c Modules/_ctypes/cfield.c Modules/_ctypes/_ctypes.c Modules/_ctypes/malloc_closure.c Modules/_ctypes/stgdict.c Modules/_ctypes/darwin/dlfcn_simple.c)
+#	Modules/_ctypes/libffi_osx/ffi.c  Modules/_ctypes/libffi_osx/x86/darwin64.S  Modules/_ctypes/libffi_osx/x86/x86-darwin.S  Modules/_ctypes/libffi_osx/x86/x86-ffi64.c  Modules/_ctypes/libffi_osx/x86/x86-ffi_darwin.c)
 pymodule(_ctypes_test Modules/_ctypes/_ctypes_test.c)
 pymodule(_curses_panel Modules/_curses_panel.c)
 target_link_libraries(py27__curses_panel ncurses panel)
